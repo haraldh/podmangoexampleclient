@@ -9,7 +9,7 @@ import (
 )
 
 func help(name string) {
-	fmt.Printf("Usage: %s <varlink address URL>\n", name)
+	fmt.Fprintf(os.Stderr, "Usage: %s [--bridge <bridge>] [<varlink address URL>]\n", name)
 	os.Exit(1)
 }
 
@@ -75,13 +75,17 @@ func main() {
 	var c *varlink.Connection
 	var err error
 
+	if !flag.Parsed() || flag.NArg() != 1 {
+		help(os.Args[0])
+	}
+
 	if bridge {
 		c, err = varlink.NewBridge(flag.Arg(0))
 	} else {
 		c, err = varlink.NewConnection(flag.Arg(0))
 	}
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error connecting to '%s': '%v'", flag.Arg(0), err)
+		fmt.Fprintf(os.Stderr, "Error connecting to '%s': %T - '%v'\n", flag.Arg(0), err, err)
 		os.Exit(1)
 	}
 
