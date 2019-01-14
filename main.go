@@ -89,6 +89,9 @@ func main() {
 		os.Exit(1)
 	}
 
+	// Be nice and cleanup
+	defer c.Close()
+
 	info, err := iopodman.GetInfo().Call(c)
 
 	if err != nil {
