@@ -66,7 +66,9 @@ func printError(methodname string, err error) {
 
 	default:
 		if err == io.EOF {
-			fmt.Fprintf(os.Stderr, "Connection closed\n",)
+			fmt.Fprintf(os.Stderr, "Connection closed\n", )
+		} else if err == io.ErrUnexpectedEOF {
+			fmt.Fprintf(os.Stderr, "Connection aborted\n", )
 		} else {
 			fmt.Fprintf(os.Stderr, "%T - '%v'\n", err, err)
 		}
