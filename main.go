@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/haraldh/varlink-go-podman/iopodman"
+	"github.com/haraldh/podmangoexampleclient/iopodman"
 	"github.com/varlink/go/varlink"
 	"os"
 )
