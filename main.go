@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/haraldh/podmangoexampleclient/iopodman"
 	"github.com/varlink/go/varlink"
+	"io"
 	"os"
 )
 
@@ -64,7 +65,11 @@ func printError(methodname string, err error) {
 		fmt.Fprintf(os.Stderr, "'%v' parameters='%v'\n", e, e.Parameters)
 
 	default:
-		fmt.Fprintf(os.Stderr, "%T - '%v'\n", err, err)
+		if err == io.EOF {
+			fmt.Fprintf(os.Stderr, "Connection closed\n",)
+		} else {
+			fmt.Fprintf(os.Stderr, "%T - '%v'\n", err, err)
+		}
 	}
 }
 
