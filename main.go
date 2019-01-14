@@ -113,28 +113,4 @@ func main() {
 	} else {
 		print(mount)
 	}
-
-	// Test error handling
-	{
-		var in struct {
-			test string
-		}
-		var out string
-		in.test = "test"
-		err = c.Call("io.unknowninterface.Strangemethod", in, out)
-		if err != nil {
-			printError("io.unknowninterface.Strangemethod()", err)
-		}
-	}
-	{
-		var in struct {
-			test string
-		}
-		var out string
-		in.test = "test"
-		err = c.Call("io.podman.UnknownMethod", in, out)
-		if err != nil {
-			printError("io.podman.UnknownMethod()", err)
-		}
-	}
 }
